@@ -1,15 +1,22 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Akash Murugan — Machine Learning &amp; Computer Vision Engineer</title>
+<meta name="description" content="Akash Murugan — Senior Machine Learning, Computer Vision and Edge AI Engineer. 9+ years building production AI systems from data and model development through deployment.">
+<meta name="author" content="Akash Murugan">
+
+<title>Akash Murugan — Senior ML & Computer Vision Engineer</title>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
 
 <style>
-/* ============ TOKENS — light is the base ============ */
+/* =========================================================
+   TOKENS
+   ========================================================= */
 :root {
   --ground:      #F5F7FA;
   --surface:     #FFFFFF;
@@ -21,7 +28,8 @@
   --ink-3:       #6B7787;
   --accent:      #B4670A;
   --accent-wash: #FBEEDC;
-  --shadow:      0 1px 2px rgba(20,25,32,.05), 0 8px 24px -12px rgba(20,25,32,.16);
+  --shadow:      0 1px 2px rgba(20,25,32,.05),
+                 0 8px 24px -12px rgba(20,25,32,.16);
 
   --f-display: "Archivo", "Helvetica Neue", Arial, sans-serif;
   --f-body:    "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
@@ -30,6 +38,7 @@
   --measure: 68ch;
   --spine:   1000px;
 }
+
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --ground:      #12161C;
@@ -42,9 +51,11 @@
     --ink-3:       #7E8B99;
     --accent:      #F2A13B;
     --accent-wash: #2A2117;
-    --shadow:      0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+    --shadow:      0 1px 2px rgba(0,0,0,.4),
+                   0 10px 28px -14px rgba(0,0,0,.7);
   }
 }
+
 :root[data-theme="dark"] {
   --ground:      #12161C;
   --surface:     #181E26;
@@ -56,11 +67,21 @@
   --ink-3:       #7E8B99;
   --accent:      #F2A13B;
   --accent-wash: #2A2117;
-  --shadow:      0 1px 2px rgba(0,0,0,.4), 0 10px 28px -14px rgba(0,0,0,.7);
+  --shadow:      0 1px 2px rgba(0,0,0,.4),
+                 0 10px 28px -14px rgba(0,0,0,.7);
 }
 
-/* ============ BASE ============ */
-* { box-sizing: border-box; }
+/* =========================================================
+   BASE
+   ========================================================= */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   background: var(--ground);
@@ -70,412 +91,1452 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
-.spine { max-width: var(--spine); margin: 0 auto; padding: 0 28px; }
-h1, h2, h3, h4 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
-p { margin: 0; }
-a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
-a:focus-visible, button:focus-visible, summary:focus-visible {
-  outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px;
-}
-.lbl {
-  font-family: var(--f-mono); font-size: 11px; font-weight: 500;
-  letter-spacing: .13em; text-transform: uppercase; color: var(--ink-3);
+
+.spine {
+  max-width: var(--spine);
+  margin: 0 auto;
+  padding: 0 28px;
 }
 
-/* ============ BOUNDING-BOX FRAME (the motif) ============ */
-/* Corner brackets, as a detector draws them. */
-.bbox { position: relative; }
-.bbox::before, .bbox::after {
-  content: ""; position: absolute; width: 13px; height: 13px; pointer-events: none;
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  text-wrap: balance;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--ink);
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+.lbl {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* =========================================================
+   BOUNDING BOX MOTIF
+   ========================================================= */
+.bbox {
+  position: relative;
+}
+
+.bbox::before,
+.bbox::after {
+  content: "";
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  pointer-events: none;
   border: 2px solid var(--accent);
 }
-.bbox::before { top: 0; left: 0; border-right: 0; border-bottom: 0; }
-.bbox::after  { bottom: 0; right: 0; border-left: 0; border-top: 0; }
 
-/* ============ HERO ============ */
-header.hero { padding: 84px 0 56px; border-bottom: 1px solid var(--line); }
-.hero-frame { padding: 26px 24px; }
+.bbox::before {
+  top: 0;
+  left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.bbox::after {
+  bottom: 0;
+  right: 0;
+  border-left: 0;
+  border-top: 0;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+header.hero {
+  padding: 76px 0 56px;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-frame {
+  padding: 26px 24px;
+}
+
 .hero h1 {
-  font-size: clamp(2.6rem, 7vw, 4.5rem); font-weight: 700; line-height: 1.02;
-  letter-spacing: -.025em; margin: 12px 0 0;
+  font-size: clamp(2.6rem, 7vw, 4.5rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -.025em;
+  margin: 12px 0 0;
 }
-.hero .role {
-  font-family: var(--f-mono); font-size: clamp(.82rem, 1.8vw, .95rem);
-  color: var(--accent); font-weight: 500; margin-top: 14px;
-}
-.hero .thesis {
-  max-width: var(--measure); margin-top: 22px; font-size: 1.06rem; color: var(--ink-2);
-}
-.hero .thesis strong { color: var(--ink); font-weight: 600; }
-.contactbar {
-  display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 26px;
-  font-family: var(--f-mono); font-size: .8rem;
-}
-.contactbar a { color: var(--ink-2); text-decoration: none;
-  border-bottom: 1px solid var(--line); padding-bottom: 2px; }
-.contactbar a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 
-/* ============ DETECTION STRIP ============ */
+.hero .role {
+  font-family: var(--f-mono);
+  font-size: clamp(.82rem, 1.8vw, .95rem);
+  color: var(--accent);
+  font-weight: 500;
+  margin-top: 14px;
+}
+
+.hero .thesis {
+  max-width: var(--measure);
+  margin-top: 22px;
+  font-size: 1.06rem;
+  color: var(--ink-2);
+}
+
+.hero .thesis strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.contactbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 28px;
+}
+
+.contactbar a {
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  padding: 8px 13px;
+  font-family: var(--f-mono);
+  font-size: .76rem;
+  transition: .15s ease;
+}
+
+.contactbar a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-wash);
+}
+
+.contactbar .primary {
+  border-color: var(--accent);
+}
+
+/* =========================================================
+   DETECTION STRIP
+   ========================================================= */
 .detections {
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
-  gap: 2px; margin-top: 38px; background: var(--line-soft);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+  gap: 2px;
+  margin-top: 38px;
+  background: var(--line-soft);
   border: 1px solid var(--line-soft);
 }
-.det { background: var(--surface); padding: 16px 16px 14px; }
+
+.det {
+  background: var(--surface);
+  padding: 16px 16px 14px;
+}
+
 .det .v {
-  font-family: var(--f-mono); font-size: 1.55rem; font-weight: 600;
-  color: var(--ink); font-variant-numeric: tabular-nums; line-height: 1.1;
+  font-family: var(--f-mono);
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
 }
-.det .k { font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--ink-3); margin-top: 7px; }
 
-/* ============ SECTIONS ============ */
-section { padding: 68px 0; border-bottom: 1px solid var(--line); }
-.sechead { padding: 14px 18px; display: inline-block; margin-bottom: 34px; }
+.det .k {
+  font-family: var(--f-mono);
+  font-size: 10.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-top: 7px;
+}
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+section {
+  padding: 68px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.sechead {
+  padding: 14px 18px;
+  display: inline-block;
+  margin-bottom: 34px;
+}
+
 .sechead h2 {
-  font-size: clamp(1.4rem, 3.4vw, 1.95rem); font-weight: 600; letter-spacing: -.015em;
+  font-size: clamp(1.4rem, 3.4vw, 1.95rem);
+  font-weight: 600;
+  letter-spacing: -.015em;
 }
-.sechead .lbl { display: block; margin-bottom: 5px; }
-.lede { max-width: var(--measure); color: var(--ink-2); margin-bottom: 34px; font-size: 1.02rem; }
 
-/* ============ PRODUCT CASES ============ */
-.cases { display: grid; gap: 20px; }
+.sechead .lbl {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.lede {
+  max-width: var(--measure);
+  color: var(--ink-2);
+  margin-bottom: 34px;
+  font-size: 1.02rem;
+}
+
+/* =========================================================
+   EXPERIENCE
+   ========================================================= */
+.experience {
+  display: grid;
+  gap: 20px;
+}
+
+.experience-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 28px 26px;
+  box-shadow: var(--shadow);
+}
+
+.experience-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.experience h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.company {
+  color: var(--accent);
+  font-family: var(--f-mono);
+  font-size: .78rem;
+  margin-top: 5px;
+}
+
+.period {
+  color: var(--ink-3);
+  font-family: var(--f-mono);
+  font-size: .72rem;
+  white-space: nowrap;
+}
+
+.experience-card p {
+  color: var(--ink-2);
+  max-width: var(--measure);
+  margin-top: 14px;
+}
+
+.experience-card ul {
+  margin: 18px 0 0;
+  padding-left: 20px;
+  color: var(--ink-2);
+}
+
+.experience-card li {
+  margin-bottom: 7px;
+}
+
+/* =========================================================
+   PRODUCT CASES
+   ========================================================= */
+.cases {
+  display: grid;
+  gap: 20px;
+}
+
 .case {
-  background: var(--surface); border: 1px solid var(--line);
-  padding: 28px 26px; box-shadow: var(--shadow);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 28px 26px;
+  box-shadow: var(--shadow);
 }
-.case-top { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; }
-.case h3 { font-size: 1.3rem; font-weight: 600; letter-spacing: -.01em; }
+
+.case-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px 16px;
+}
+
+.case h3 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
 .case .era {
-  font-family: var(--f-mono); font-size: .72rem; color: var(--ink-3);
-  letter-spacing: .07em; text-transform: uppercase;
+  font-family: var(--f-mono);
+  font-size: .72rem;
+  color: var(--ink-3);
+  letter-spacing: .07em;
+  text-transform: uppercase;
 }
-.case .what { color: var(--ink-2); margin-top: 10px; max-width: var(--measure); }
-.case ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 9px; }
-.case li { position: relative; padding-left: 20px; color: var(--ink-2); font-size: .955rem; }
+
+.case .what {
+  color: var(--ink-2);
+  margin-top: 10px;
+  max-width: var(--measure);
+}
+
+.case ul {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 9px;
+}
+
+.case li {
+  position: relative;
+  padding-left: 20px;
+  color: var(--ink-2);
+  font-size: .955rem;
+}
+
 .case li::before {
-  content: ""; position: absolute; left: 0; top: .58em;
-  width: 7px; height: 7px; border: 1.5px solid var(--accent);
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .58em;
+  width: 7px;
+  height: 7px;
+  border: 1.5px solid var(--accent);
 }
-.case li b { color: var(--ink); font-weight: 600; }
-.stack { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px; }
+
+.case li b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+
 .chip {
-  font-family: var(--f-mono); font-size: 11px; color: var(--ink-2);
-  background: var(--surface-2); border: 1px solid var(--line-soft);
-  padding: 3px 8px; white-space: nowrap;
+  font-family: var(--f-mono);
+  font-size: 11px;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border: 1px solid var(--line-soft);
+  padding: 3px 8px;
+  white-space: nowrap;
 }
 
-/* ============ SYSTEMS GRID (breadth) ============ */
+/* =========================================================
+   IMPACT BOX
+   ========================================================= */
+.impact {
+  margin-top: 20px;
+  padding: 16px 18px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-wash);
+  color: var(--ink-2);
+  font-size: .92rem;
+}
+
+.impact strong {
+  color: var(--ink);
+}
+
+/* =========================================================
+   SYSTEMS GRID
+   ========================================================= */
 .grid-sys {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
-  gap: 2px; background: var(--line-soft); border: 1px solid var(--line-soft);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  gap: 2px;
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft);
 }
-.sys { background: var(--surface); padding: 18px 18px 20px; }
-.sys h4 { font-size: .96rem; font-weight: 600; letter-spacing: -.005em; }
-.sys p { color: var(--ink-2); font-size: .875rem; margin-top: 7px; line-height: 1.5; }
 
-/* ============ TIMELINE (a real sequence — numbering earns its place) ============ */
-.phases { display: grid; gap: 0; }
-.phase {
-  display: grid; grid-template-columns: 74px 1fr; gap: 22px;
-  padding: 24px 0; border-top: 1px solid var(--line-soft);
+.sys {
+  background: var(--surface);
+  padding: 18px 18px 20px;
 }
-.phase:first-child { border-top: 0; }
+
+.sys h4 {
+  font-size: .96rem;
+  font-weight: 600;
+  letter-spacing: -.005em;
+}
+
+.sys p {
+  color: var(--ink-2);
+  font-size: .875rem;
+  margin-top: 7px;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   TIMELINE
+   ========================================================= */
+.phases {
+  display: grid;
+  gap: 0;
+}
+
+.phase {
+  display: grid;
+  grid-template-columns: 74px 1fr;
+  gap: 22px;
+  padding: 24px 0;
+  border-top: 1px solid var(--line-soft);
+}
+
+.phase:first-child {
+  border-top: 0;
+}
+
 .phase .idx {
-  font-family: var(--f-mono); font-size: 11px; letter-spacing: .1em; color: var(--ink-3);
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: var(--ink-3);
   padding-top: 4px;
 }
-.phase .idx b { display: block; font-size: 1.5rem; color: var(--accent); font-weight: 600;
-  letter-spacing: 0; line-height: 1; margin-bottom: 6px; }
-.phase h3 { font-size: 1.08rem; font-weight: 600; }
-.phase p { color: var(--ink-2); margin-top: 7px; max-width: var(--measure); font-size: .96rem; }
 
-/* ============ SKILLS ============ */
-.skills { display: grid; gap: 2px; background: var(--line-soft); border: 1px solid var(--line-soft); }
-.skrow { background: var(--surface); padding: 17px 20px;
-  display: grid; grid-template-columns: 190px 1fr; gap: 20px; }
-.skrow .lbl { padding-top: 3px; }
-.skrow p { color: var(--ink-2); font-size: .93rem; }
-.skrow em { font-style: normal; color: var(--ink-3); }
-
-/* ============ FOOTER ============ */
-footer { padding: 60px 0 76px; }
-footer .note { color: var(--ink-3); font-size: .88rem; margin-top: 18px; max-width: var(--measure); }
-.cta {
-  display: inline-block; margin-top: 22px; font-family: var(--f-mono); font-size: .88rem;
-  border: 2px solid var(--accent); color: var(--ink); padding: 11px 20px; text-decoration: none;
+.phase .idx b {
+  display: block;
+  font-size: 1.5rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  margin-bottom: 6px;
 }
-.cta:hover { background: var(--accent-wash); }
-.fill { background: #fff2a8; color: #4a3a10; padding: 0 3px; }
+
+.phase h3 {
+  font-size: 1.08rem;
+  font-weight: 600;
+}
+
+.phase p {
+  color: var(--ink-2);
+  margin-top: 7px;
+  max-width: var(--measure);
+  font-size: .96rem;
+}
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+.skills {
+  display: grid;
+  gap: 2px;
+  background: var(--line-soft);
+  border: 1px solid var(--line-soft);
+}
+
+.skrow {
+  background: var(--surface);
+  padding: 17px 20px;
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 20px;
+}
+
+.skrow .lbl {
+  padding-top: 3px;
+}
+
+.skrow p {
+  color: var(--ink-2);
+  font-size: .93rem;
+}
+
+.skrow em {
+  font-style: normal;
+  color: var(--ink-3);
+}
+
+/* =========================================================
+   EDUCATION
+   ========================================================= */
+.education-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: 24px;
+}
+
+.education-card h3 {
+  font-size: 1.08rem;
+}
+
+.education-card p {
+  color: var(--ink-2);
+  margin-top: 5px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  padding: 60px 0 76px;
+}
+
+footer .note {
+  color: var(--ink-3);
+  font-size: .88rem;
+  margin-top: 18px;
+  max-width: var(--measure);
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.cta {
+  display: inline-block;
+  font-family: var(--f-mono);
+  font-size: .88rem;
+  border: 2px solid var(--accent);
+  color: var(--ink);
+  padding: 11px 20px;
+  text-decoration: none;
+}
+
+.cta:hover {
+  background: var(--accent-wash);
+}
+
+.cta.secondary {
+  border-width: 1px;
+  border-color: var(--line);
+  background: var(--surface);
+}
+
+.cta.secondary:hover {
+  border-color: var(--accent);
+}
 
 @media (max-width: 720px) {
-  .skrow { grid-template-columns: 1fr; gap: 7px; }
-  .phase { grid-template-columns: 54px 1fr; gap: 14px; }
-  header.hero { padding: 52px 0 40px; }
-  section { padding: 50px 0; }
+
+  .skrow {
+    grid-template-columns: 1fr;
+    gap: 7px;
+  }
+
+  .phase {
+    grid-template-columns: 54px 1fr;
+    gap: 14px;
+  }
+
+  header.hero {
+    padding: 52px 0 40px;
+  }
+
+  section {
+    padding: 50px 0;
+  }
+
+  .experience-top {
+    display: block;
+  }
+
+  .period {
+    margin-top: 8px;
+  }
 }
+
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; animation: none !important; }
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
 }
 </style>
 </head>
+
 <body>
 
 <div class="spine">
 
+<!-- =======================================================
+     HERO
+     ======================================================= -->
+
 <header class="hero">
+
   <div class="hero-frame bbox">
+
     <span class="lbl">Chennai, Tamil Nadu · India</span>
+
     <h1>Akash Murugan</h1>
-    <p class="role">Machine Learning &amp; Computer Vision Engineer — full-stack AI systems · edge deployment</p>
-    <p class="thesis">
-      9+ Years building machine-learning systems end to end. I <strong>train the model</strong>, then
-      <strong>build the entire system around it</strong> — annotation tooling, training pipeline,
-      backend, frontend, dashboards, and deployment onto whatever hardware it has to run on.
-      Twenty-plus production systems across retail, transit, manufacturing, automotive and industrial AR.
+
+    <p class="role">
+      Senior Machine Learning &amp; Computer Vision Engineer · Edge AI · AR
     </p>
-    <nav class="contactbar">
-      <a href="mailto:saiakash246@gmail.com">saiakash246@gmail.com</a>
-      <a href="tel:+917418924317">+91 74189 24317</a>
-      <a href="https://www.linkedin.com/in/akash-murugan-6472aa143/">LinkedIn</a>
+
+    <p class="thesis">
+      <strong>9+ years building production AI systems end to end.</strong>
+      I work across computer vision, machine learning, edge deployment and
+      application engineering — from dataset design and model training to
+      backend systems, user interfaces and on-device inference.
+    </p>
+
+    <nav class="contactbar" aria-label="Professional links">
+
+      <a class="primary" href="Akash_Murugan_Resume.pdf" target="_blank">
+        Download Resume
+      </a>
+
+      <a href="https://www.linkedin.com/in/akash-murugan-6472aa143/"
+         target="_blank"
+         rel="noopener">
+        LinkedIn
+      </a>
+
+      <!-- Add your GitHub URL here when ready -->
+      <!--
+      <a href="https://github.com/YOUR_USERNAME"
+         target="_blank"
+         rel="noopener">
+        GitHub
+      </a>
+      -->
+
+      <a href="mailto:saiakash246@gmail.com">
+        Email
+      </a>
+
     </nav>
+
   </div>
 
   <div class="detections">
-    <div class="det"><div class="v">9</div><div class="k">Years shipping ML</div></div>
-    <div class="det"><div class="v">20+</div><div class="k">Production systems</div></div>
-    <div class="det"><div class="v">14</div><div class="k">Retail analytics modules</div></div>
-    <div class="det"><div class="v">3</div><div class="k">Edge platforms shipped</div></div>
-    <div class="det"><div class="v">28</div><div class="k">Languages localised</div></div>
+
+    <div class="det">
+      <div class="v">9+</div>
+      <div class="k">Years experience</div>
+    </div>
+
+    <div class="det">
+      <div class="v">20+</div>
+      <div class="k">Production AI systems</div>
+    </div>
+
+    <div class="det">
+      <div class="v">14</div>
+      <div class="k">Retail analytics modules</div>
+    </div>
+
+    <div class="det">
+      <div class="v">3</div>
+      <div class="k">Edge platforms</div>
+    </div>
+
+    <div class="det">
+      <div class="v">28</div>
+      <div class="k">Languages supported</div>
+    </div>
+
   </div>
+
 </header>
 
+
+<!-- =======================================================
+     ABOUT
+     ======================================================= -->
+
 <section>
+
+  <div class="sechead bbox">
+    <span class="lbl">Profile</span>
+    <h2>Production AI, end to end</h2>
+  </div>
+
+  <p class="lede">
+    My focus is building AI systems that actually operate outside a notebook.
+    I have worked across computer vision, model training, synthetic data,
+    edge inference, AR, backend services, dashboards and embedded deployment.
+    The common thread is owning the complete path from data to a working product.
+  </p>
+
+</section>
+
+
+<!-- =======================================================
+     EXPERIENCE
+     ======================================================= -->
+
+<section>
+
+  <div class="sechead bbox">
+    <span class="lbl">Experience</span>
+    <h2>Professional experience</h2>
+  </div>
+
+  <div class="experience">
+
+    <article class="experience-card">
+
+      <div class="experience-top">
+
+        <div>
+          <h3>Senior Software / Machine Learning Engineer</h3>
+          <div class="company">
+            Thoht Delta Research &amp; Development Centre / ComputerSees
+          </div>
+        </div>
+
+        <div class="period">
+          2017 — Present
+        </div>
+
+      </div>
+
+      <p>
+        Worked across software engineering, machine learning, computer vision,
+        edge AI, industrial AR and product development in a small engineering
+        team, taking systems from prototype through deployment.
+      </p>
+
+      <ul>
+        <li>
+          Designed and delivered production computer-vision systems for
+          retail analytics, transit, manufacturing, industrial inspection,
+          automotive and AR-guided maintenance.
+        </li>
+
+        <li>
+          Built complete ML workflows covering dataset preparation,
+          annotation, augmentation, training, evaluation, model export
+          and deployment.
+        </li>
+
+        <li>
+          Developed edge and mobile inference solutions using
+          TensorFlow Lite, ONNX and embedded NVIDIA / ARM platforms.
+        </li>
+
+        <li>
+          Built supporting backend, frontend, dashboard, authentication,
+          localisation and data-management systems around AI products.
+        </li>
+
+        <li>
+          Worked across Python, C#, JavaScript, Unity, React, Flask,
+          Node.js, Docker, Linux and cloud GPU environments.
+        </li>
+      </ul>
+
+      <div class="stack">
+        <span class="chip">Computer Vision</span>
+        <span class="chip">Machine Learning</span>
+        <span class="chip">Edge AI</span>
+        <span class="chip">Python</span>
+        <span class="chip">Unity</span>
+        <span class="chip">React</span>
+        <span class="chip">TensorFlow</span>
+        <span class="chip">PyTorch</span>
+      </div>
+
+    </article>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     SELECTED WORK
+     ======================================================= -->
+
+<section>
+
   <div class="sechead bbox">
     <span class="lbl">Selected work</span>
     <h2>Systems, not just models</h2>
   </div>
+
   <p class="lede">
-    Built at Thoht Delta Research &amp; Development Centre / ComputerSees, a seven-engineer computer
-    vision product company, as sole or lead engineer.
+    Selected production systems where I owned significant parts of the
+    computer-vision, machine-learning, application or deployment pipeline.
   </p>
 
   <div class="cases">
 
+
+    <!-- VISIONGUIDE -->
+
     <article class="case">
+
       <div class="case-top">
         <h3>VisionGuide</h3>
-        <span class="era">AR-guided repair · iOS + Android</span>
+        <span class="era">Industrial AR · iOS + Android</span>
       </div>
+
       <p class="what">
-        Point a phone at physical equipment; it recognises the machine, tracks its 3D pose live, and
-        pins step-by-step service instructions onto the real object.
+        Mobile AR platform that recognises industrial equipment, tracks its
+        3D pose and overlays step-by-step service instructions directly
+        onto the physical machine.
       </p>
+
+      <div class="impact">
+        <strong>Core contribution:</strong>
+        Built across the Unity AR application, on-device computer vision,
+        3D tracking, workflow authoring and supporting web platform.
+      </div>
+
       <ul>
-        <li>Built the Unity application on <b>ARCore and ARKit</b>, detecting equipment and pinning live AR guidance onto it.</li>
-        <li>Integrated and debugged the on-device inference layer — native arm64 TFLite YOLOv8 detection and M3T 3D tracking behind a P/Invoke bridge — resolving GPU/NNAPI delegate, threading and lifecycle failures on real hardware.</li>
-        <li>Rebuilt viewpoint detection from a brittle hard-gate IoU matcher into <b>continuous sum-IoU template retrieval</b> with cascading RANSAC PnP thresholds, across <b>8 documented design iterations</b>.</li>
-        <li>Built the <b>Workflow Editor and 3D CAD viewer</b> in React: node-graph procedure authoring, Three.js CAD labelling, multi-tenant organisations with role-based access.</li>
-        <li>Shipped <b>28-language localisation</b> with custom Indic ligature shaping, plus <b>80 automated tests</b> and a frame-replay harness for off-device regression testing.</li>
+
+        <li>
+          Built the Unity application using
+          <b>AR Foundation, ARCore and ARKit</b> for equipment recognition
+          and real-time AR guidance.
+        </li>
+
+        <li>
+          Integrated and debugged on-device
+          <b>TFLite YOLOv8 detection and M3T 3D tracking</b>
+          through native ARM64/P/Invoke integration.
+        </li>
+
+        <li>
+          Rebuilt viewpoint detection from a brittle IoU gate into
+          <b>continuous sum-IoU template retrieval with cascading
+          RANSAC/PnP thresholds</b> across multiple design iterations.
+        </li>
+
+        <li>
+          Built the <b>React workflow editor and Three.js CAD viewer</b>,
+          including node-based procedure authoring and multi-tenant
+          role-based access.
+        </li>
+
+        <li>
+          Delivered <b>28-language localisation</b>, custom Indic
+          text shaping, automated tests and a frame-replay system
+          for computer-vision regression testing.
+        </li>
+
       </ul>
+
       <div class="stack">
-        <span class="chip">Unity</span><span class="chip">C#</span><span class="chip">AR Foundation</span>
-        <span class="chip">ARCore</span><span class="chip">ARKit</span><span class="chip">TensorFlow Lite</span>
-        <span class="chip">YOLOv8</span><span class="chip">React</span><span class="chip">Three.js</span>
+        <span class="chip">Unity</span>
+        <span class="chip">C#</span>
+        <span class="chip">AR Foundation</span>
+        <span class="chip">ARCore</span>
+        <span class="chip">ARKit</span>
+        <span class="chip">TensorFlow Lite</span>
+        <span class="chip">YOLOv8</span>
+        <span class="chip">PnP</span>
+        <span class="chip">RANSAC</span>
+        <span class="chip">React</span>
+        <span class="chip">Three.js</span>
         <span class="chip">Firebase</span>
       </div>
+
     </article>
 
+
+    <!-- X-RAY -->
+
     <article class="case">
+
       <div class="case-top">
         <h3>X-ray PCB Inspection</h3>
-        <span class="era">Industrial defect detection</span>
+        <span class="era">Industrial computer vision</span>
       </div>
+
       <p class="what">
-        Detecting components and faults in X-ray imagery of circuit boards — the most rigorous model
-        work I have done, and the easiest to prove.
+        Computer-vision system for detecting components and defects in
+        X-ray imagery of circuit boards, including dataset engineering,
+        model development and production tooling.
       </p>
-      <ul>
-        <li>Trained and tuned detection models to identify components and defects, comparing architectures and training strategies to select the production model.</li>
-        <li>Solved long-tail class imbalance by generating <b>Blender CAD renders and 3D Gaussian Splatting synthetic imagery</b> plus background negatives, blended with real captures.</li>
-        <li>Built the <b>dataset and training platform</b> in Flask and JavaScript: ingestion, annotation-format conversion, class balancing, augmentation, splitting, training, evaluation analytics and multi-format model export.</li>
-        <li>Built <b>pose-driven video stabilisation</b> that warps frames by homography from ARKit rotation and intrinsics — it never looks at pixels, so moving tracked objects cannot corrupt it.</li>
-      </ul>
-      <div class="stack">
-        <span class="chip">PyTorch</span><span class="chip">Ultralytics</span><span class="chip">YOLOv8</span>
-        <span class="chip">OpenCV</span><span class="chip">Albumentations</span><span class="chip">Flask</span>
-        <span class="chip">Blender</span><span class="chip">3D Gaussian Splatting</span><span class="chip">Azure GPU</span>
+
+      <div class="impact">
+        <strong>Key engineering problem:</strong>
+        Addressing long-tail class imbalance and limited real-world
+        training data using synthetic industrial imagery.
       </div>
+
+      <ul>
+
+        <li>
+          Trained and tuned detection models to identify components and
+          defects, comparing architectures and training strategies for
+          production selection.
+        </li>
+
+        <li>
+          Generated <b>Blender CAD renders and 3D Gaussian Splatting
+          synthetic imagery</b>, combined with background negatives
+          and real captures.
+        </li>
+
+        <li>
+          Built the <b>dataset and training platform</b> covering ingestion,
+          annotation conversion, class balancing, augmentation, splitting,
+          training, evaluation and multi-format model export.
+        </li>
+
+        <li>
+          Developed pose-driven video stabilisation using
+          <b>homography from ARKit rotation and camera intrinsics</b>
+          without relying on image-pixel tracking.
+        </li>
+
+      </ul>
+
+      <div class="stack">
+        <span class="chip">PyTorch</span>
+        <span class="chip">Ultralytics</span>
+        <span class="chip">YOLOv8</span>
+        <span class="chip">OpenCV</span>
+        <span class="chip">Albumentations</span>
+        <span class="chip">Flask</span>
+        <span class="chip">Blender</span>
+        <span class="chip">Gaussian Splatting</span>
+        <span class="chip">Azure GPU</span>
+      </div>
+
     </article>
 
+
+    <!-- RETAIL -->
+
     <article class="case">
+
       <div class="case-top">
         <h3>Retail Store Analytics</h3>
-        <span class="era">14-module product on existing CCTV</span>
+        <span class="era">14-module multi-camera platform</span>
       </div>
+
       <p class="what">
-        A full retail operations product running on cameras the store already had — no new hardware.
-        Model, backend and dashboard.
+        AI-powered retail analytics platform built around existing CCTV
+        infrastructure, covering customer behaviour, store operations,
+        computer vision and camera monitoring.
       </p>
-      <ul>
-        <li>Walk-in count and <b>conversion</b>, dwell time, aisle traffic, age and gender demographics, popular timings.</li>
-        <li>Operational modules well beyond footfall: <b>staff attendance, stock-checking time, store cleaning time, open/close compliance</b> and camera-health monitoring.</li>
-        <li>Paired with a <b>person re-identification system</b> matching individuals across entry and exit cameras using time-bounded track strips and path state — giving true unique visitors, with staff separated from customers.</li>
-      </ul>
-      <div class="stack">
-        <span class="chip">Python</span><span class="chip">OpenCV</span><span class="chip">Re-ID</span>
-        <span class="chip">MongoDB</span><span class="chip">Node.js</span><span class="chip">AngularJS</span>
+
+      <div class="impact">
+        <strong>14 analytics modules</strong> covering customer traffic,
+        dwell time, aisle activity, demographics, staff activity,
+        compliance and camera health.
       </div>
+
+      <ul>
+
+        <li>
+          Developed walk-in counting, conversion analysis, dwell time,
+          aisle traffic, demographic analytics and peak-time reporting.
+        </li>
+
+        <li>
+          Built operational modules for <b>staff attendance, stock checking,
+          cleaning activity, opening/closing compliance</b> and camera health.
+        </li>
+
+        <li>
+          Developed <b>person re-identification</b> to match individuals
+          across entry and exit cameras and estimate unique visitors while
+          separating staff from customers.
+        </li>
+
+      </ul>
+
+      <div class="stack">
+        <span class="chip">Python</span>
+        <span class="chip">OpenCV</span>
+        <span class="chip">Person Re-ID</span>
+        <span class="chip">Multi-camera Tracking</span>
+        <span class="chip">MongoDB</span>
+        <span class="chip">Node.js</span>
+        <span class="chip">AngularJS</span>
+      </div>
+
     </article>
+
+
+    <!-- BUSNET -->
 
     <article class="case">
+
       <div class="case-top">
         <h3>BusNet — Passenger Counting</h3>
-        <span class="era">Transit · multi-camera embedded</span>
+        <span class="era">Transit · embedded computer vision</span>
       </div>
+
       <p class="what">
-        Counting passengers on buses. Vehicles lose connectivity constantly, so the units are offline-first and sync when they can.
+        Offline-first passenger-counting system for buses using
+        synchronised multi-camera embedded devices that process data
+        locally and synchronise when connectivity becomes available.
       </p>
-      <ul>
-        <li>Detection models trained on real in-vehicle footage, built from raw video captured and annotated in house.</li>
-        <li><b>Synchronised multi-camera embedded units</b> in weatherproof housings, deployed across a numbered fleet.</li>
-        <li>Ran on <b>Jetson Nano, Raspberry Pi and Odroid-XU4</b> with automated Bash provisioning across four Linux distributions.</li>
-      </ul>
-      <div class="stack">
-        <span class="chip">Detectron2</span><span class="chip">TensorFlow</span><span class="chip">OpenCV</span>
-        <span class="chip">Jetson Nano</span><span class="chip">Raspberry Pi</span><span class="chip">Odroid-XU4</span>
+
+      <div class="impact">
+        <strong>Edge deployment:</strong>
+        Designed around unreliable connectivity and constrained embedded
+        hardware rather than assuming a permanent cloud connection.
       </div>
+
+      <ul>
+
+        <li>
+          Trained detection models using real in-vehicle footage captured
+          and annotated in-house.
+        </li>
+
+        <li>
+          Built <b>synchronised multi-camera embedded units</b> deployed
+          across a numbered vehicle fleet.
+        </li>
+
+        <li>
+          Deployed on <b>Jetson Nano, Raspberry Pi and Odroid-XU4</b>
+          with automated Bash provisioning across multiple Linux environments.
+        </li>
+
+      </ul>
+
+      <div class="stack">
+        <span class="chip">Detectron2</span>
+        <span class="chip">TensorFlow</span>
+        <span class="chip">OpenCV</span>
+        <span class="chip">Jetson Nano</span>
+        <span class="chip">Raspberry Pi</span>
+        <span class="chip">Odroid-XU4</span>
+        <span class="chip">Embedded Linux</span>
+      </div>
+
     </article>
 
   </div>
+
 </section>
 
+
+<!-- =======================================================
+     ENGINEERING BREADTH
+     ======================================================= -->
+
 <section>
+
   <div class="sechead bbox">
     <span class="lbl">Breadth</span>
-    <h2>Also built and shipped</h2>
+    <h2>Additional systems</h2>
   </div>
+
   <p class="lede">
-    Each of these is a complete system — trained model, backend and frontend — not a notebook experiment.
+    Beyond the selected projects, I have built and shipped additional
+    computer-vision, machine-learning, software and embedded systems.
   </p>
+
   <div class="grid-sys">
-    <div class="sys"><h4>ADAS &amp; traffic-sign detection</h4><p>Road-scene object detection for driver assistance, including speed-limit signs, tuned for real-time inference on embedded hardware.</p></div>
-    <div class="sys"><h4>Crimping wire inspection</h4><p>Object detection combined with classification to grade crimped wire terminations for manufacturing quality control.</p></div>
-    <div class="sys"><h4>ATS with NER</h4><p>Full applicant-tracking platform with a trained named-entity-recognition model parsing résumés into structured candidate fields for automated screening.</p></div>
-    <div class="sys"><h4>Speech recognition</h4><p>Training pipeline and complete application built around a speech-recognition model.</p></div>
-    <div class="sys"><h4>Segmentation &amp; background removal</h4><p>Semantic segmentation models with the full system around them, including a background-removal product.</p></div>
-    <div class="sys"><h4>Image classification</h4><p>Classification training pipeline with annotation tooling, inference API and web interface.</p></div>
-    <div class="sys"><h4>SVM &amp; classical ML</h4><p>SVM model creation delivered as a complete system, for problems that did not warrant deep learning.</p></div>
-    <div class="sys"><h4>Transit shipment analytics</h4><p>Assignment and shipping-status tracking — dispatch through delivery — with a reporting dashboard.</p></div>
-    <div class="sys"><h4>i18n / localisation service</h4><p>Localisation service supporting dynamic language switching, Unicode and multi-script rendering.</p></div>
-    <div class="sys"><h4>OTP authentication API</h4><p>OTP and SMS authentication system, integrated across multiple products.</p></div>
-    <div class="sys"><h4>Real-time chat</h4><p>Chat application on NestJS and TypeORM — rooms, message status, file attachments, threaded replies.</p></div>
-    <div class="sys"><h4>IoT sensor systems</h4><p>Sensor integration and edge devices: PIR, GPS, infrared, accelerometer, gyroscope, Arduino power telemetry.</p></div>
-    <div class="sys"><h4>Dashboards &amp; web apps</h4><p>React and AngularJS analytical dashboards, Python Flask applications, Mapbox route visualisation, PubNub realtime messaging.</p></div>
+
+    <div class="sys">
+      <h4>ADAS &amp; Traffic Signs</h4>
+      <p>
+        Road-scene object detection including speed-limit signs,
+        tuned for real-time embedded inference.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Industrial Wire Inspection</h4>
+      <p>
+        Detection and classification pipeline for grading crimped
+        wire terminations in manufacturing.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>ATS &amp; Resume NER</h4>
+      <p>
+        Applicant-tracking platform using named-entity recognition
+        to extract structured candidate information.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Speech Recognition</h4>
+      <p>
+        Model training pipeline and complete application around
+        speech-recognition capabilities.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Segmentation &amp; Background Removal</h4>
+      <p>
+        Semantic segmentation models and production background-removal
+        application.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Image Classification</h4>
+      <p>
+        Training pipeline, annotation tooling, inference API and
+        web interface for image classification.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Classical Machine Learning</h4>
+      <p>
+        SVM and traditional ML systems for problems where deep learning
+        was not required.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Transit &amp; Shipment Analytics</h4>
+      <p>
+        Truck and shipment assignment, driver information, status
+        tracking, fuel, toll and delivery reporting.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Localisation Platform</h4>
+      <p>
+        Dynamic language switching, Unicode handling and
+        multi-script application support.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Authentication APIs</h4>
+      <p>
+        OTP/SMS authentication, JWT-based access control and
+        reusable authentication services.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>Real-time Applications</h4>
+      <p>
+        Chat, messaging, file attachments, threaded replies and
+        realtime communication systems.
+      </p>
+    </div>
+
+    <div class="sys">
+      <h4>IoT &amp; Embedded Systems</h4>
+      <p>
+        GPS, PIR, infrared, accelerometer, gyroscope and Arduino
+        telemetry integrations.
+      </p>
+    </div>
+
   </div>
+
 </section>
 
+
+<!-- =======================================================
+     CAREER TRAJECTORY
+     ======================================================= -->
+
 <section>
+
   <div class="sechead bbox">
     <span class="lbl">Trajectory</span>
-    <h2>9+ Years, three phases</h2>
+    <h2>9+ years, three phases</h2>
   </div>
+
   <div class="phases">
+
     <div class="phase">
-      <div class="idx"><b>01</b>2017–19</div>
-      <div>
-        <h3>Full-stack and IoT generalist</h3>
-        <p>
-          Single-board computers, sensor integration, and the networking layer — a captive portal built
-          from scratch on hostapd, iptables and DNS routing with SMS-OTP auth. MERN and MEAN stack web applications,
-          AngularJS dashboards, Mapbox route visualisation, PubNub realtime messaging, and shell
-          automation for provisioning devices in the field.
-        </p>
+
+      <div class="idx">
+        <b>01</b>
+        2017–19
       </div>
+
+      <div>
+
+        <h3>Full-stack &amp; IoT engineering</h3>
+
+        <p>
+          Built web applications, analytical dashboards, embedded Linux
+          systems, sensor integrations, captive portals, authentication
+          services, networking infrastructure and field-device provisioning.
+        </p>
+
+      </div>
+
     </div>
+
+
     <div class="phase">
-      <div class="idx"><b>02</b>2019–22</div>
-      <div>
-        <h3>Machine learning, delivered as products</h3>
-        <p>
-          Retail analytics, re-identification, passenger counting, crimping inspection, the ATS with its
-          NER model, speech recognition, segmentation and SVM systems. This is where the pattern set in:
-          train the model, then build everything around it. It is also where I learned that accuracy on
-          a validation split is not the same thing as a product that works in a moving vehicle.
-        </p>
+
+      <div class="idx">
+        <b>02</b>
+        2019–22
       </div>
+
+      <div>
+
+        <h3>Machine learning &amp; computer vision</h3>
+
+        <p>
+          Developed retail analytics, person re-identification, passenger
+          counting, industrial inspection, NER, speech recognition,
+          segmentation, classification and classical ML systems.
+          The focus shifted from models alone to complete production systems.
+        </p>
+
+      </div>
+
     </div>
+
+
     <div class="phase">
-      <div class="idx"><b>03</b>2023–26</div>
-      <div>
-        <h3>Edge AI and AR</h3>
-        <p>
-          VisionGuide, X-ray inspection and ADAS. On-device inference with TFLite delegates, markerless
-          3D tracking, synthetic training data from CAD renders and Gaussian splats, and the web tooling
-          other people use to author AR procedures. Increasingly I build the platform, not just the model.
-        </p>
+
+      <div class="idx">
+        <b>03</b>
+        2023–26
       </div>
+
+      <div>
+
+        <h3>Edge AI &amp; industrial AR</h3>
+
+        <p>
+          Focused on on-device inference, industrial AR, 3D pose estimation,
+          synthetic training data, model optimisation and embedded deployment.
+          Increasingly owning the complete platform around the model.
+        </p>
+
+      </div>
+
     </div>
+
   </div>
+
 </section>
+
+
+<!-- =======================================================
+     CAPABILITY
+     ======================================================= -->
 
 <section>
+
   <div class="sechead bbox">
     <span class="lbl">Capability</span>
-    <h2>What I work in</h2>
+    <h2>Technical expertise</h2>
   </div>
+
   <div class="skills">
+
     <div class="skrow">
-      <span class="lbl">Machine learning</span>
-      <p>Object detection (YOLOv5/v8/v11, Detectron2), image classification, semantic segmentation, background removal, person re-identification, speech recognition, named-entity recognition, SVM and classical ML, OCR (EasyOCR) and barcode / QR / DataMatrix decoding, multi-object tracking. TensorFlow, TensorFlow Lite, PyTorch, PyTorch Lightning, Ultralytics, scikit-learn, ONNX, OpenCV.</p>
+
+      <span class="lbl">Computer vision &amp; ML</span>
+
+      <p>
+        Object detection (YOLOv5/v8/v11, Detectron2), image classification,
+        semantic segmentation, background removal, person re-identification,
+        multi-object tracking, OCR, barcode/QR/DataMatrix decoding,
+        speech recognition, NER, SVM and classical ML.
+        TensorFlow, TensorFlow Lite, PyTorch, Ultralytics, scikit-learn,
+        ONNX and OpenCV.
+      </p>
+
     </div>
+
+
     <div class="skrow">
-      <span class="lbl">Data, training &amp; MLOps</span>
-      <p>Dataset design, annotation (CVAT, Supervisely, LabelImg, Roboflow), synthetic data from Blender CAD renders and 3D Gaussian Splatting, augmentation, class balancing, transfer learning, hyperparameter tuning, error analysis. Experiment tracking with MLflow and TensorBoard.</p>
+
+      <span class="lbl">Data &amp; model development</span>
+
+      <p>
+        Dataset design, annotation with CVAT/Supervisely/LabelImg/Roboflow,
+        synthetic data generation, Blender CAD renders, 3D Gaussian Splatting,
+        augmentation, class balancing, transfer learning, hyperparameter
+        tuning, error analysis, MLflow and TensorBoard.
+      </p>
+
     </div>
+
+
     <div class="skrow">
-      <span class="lbl">Edge &amp; mobile</span>
-      <p>TFLite GPU/NNAPI/XNNPACK delegates, INT8/FP16 quantization, export to ONNX, TFLite, TorchScript, TensorRT and CoreML. Jetson Nano, Raspberry Pi, Odroid-XU4. Android/iOS on-device inference, P/Invoke and JNI bridging, on-device profiling. Android Studio, Android SDK/NDK, Gradle, adb and logcat, Xcode and iOS build signing, APK/IPA release.</p>
+
+      <span class="lbl">Edge AI &amp; mobile</span>
+
+      <p>
+        TensorFlow Lite GPU/NNAPI/XNNPACK delegates, INT8/FP16 optimisation,
+        ONNX, TFLite, TorchScript, TensorRT and CoreML.
+        NVIDIA Jetson Nano, Raspberry Pi, Odroid-XU4, Android and iOS
+        on-device inference, JNI/P/Invoke integration and device profiling.
+      </p>
+
     </div>
+
+
     <div class="skrow">
-      <span class="lbl">Backend &amp; APIs</span>
-      <p>MERN and MEAN stack, Python (Flask, FastAPI, Uvicorn, Pydantic), Node.js (Express, NestJS), REST APIs, WebSockets/Socket.IO, JWT and Passport authentication, bcrypt, role-based access control, multi-tenant architecture, OTP/SMS auth, Swagger/OpenAPI, TypeORM, Prisma, MongoDB, MySQL, Firebase/Firestore, SQLite.</p>
-    </div>
-    <div class="skrow">
-      <span class="lbl">Frontend</span>
-      <p>React, Three.js (react-three-fiber), ReactFlow, Next.js, AngularJS, Tailwind CSS, Material UI, Ant Design, Recharts, i18n/localisation, analytical dashboards.</p>
-    </div>
-    <div class="skrow">
+
       <span class="lbl">AR &amp; 3D</span>
-      <p>Unity, C#, AR Foundation, ARCore, ARKit, glTF/Draco/KTX2, 3D model tracking, PnP pose estimation, RANSAC, homography, Blender.</p>
+
+      <p>
+        Unity, C#, AR Foundation, ARCore, ARKit, 3D model tracking,
+        PnP pose estimation, RANSAC, homography, glTF/Draco/KTX2
+        and Blender.
+      </p>
+
     </div>
+
+
     <div class="skrow">
-      <span class="lbl">Programming languages</span>
-      <p>Python, JavaScript (Node.js), C#.</p>
+
+      <span class="lbl">Backend &amp; APIs</span>
+
+      <p>
+        Python, Flask, FastAPI, Uvicorn, Pydantic, Node.js, Express,
+        NestJS, REST APIs, WebSockets, Socket.IO, JWT, Passport,
+        role-based access control, multi-tenant systems, Swagger/OpenAPI,
+        MongoDB, MySQL, Firebase/Firestore and SQLite.
+      </p>
+
     </div>
+
+
     <div class="skrow">
-      <span class="lbl">Cloud, DevOps &amp; Linux</span>
-      <p>AWS (EC2, S3), Azure (GPU VMs, Storage), GCP (Compute Engine, Colab), Jupyter, Docker and Docker Compose, conda/Miniconda, Git, Vite, ESLint, pytest, Jest, FFmpeg, Bash/shell scripting. Ubuntu, Raspbian, DietPi, JetPack, systemd, iptables, DNS/DHCP, hostapd, captive portals (Squid, CoovaChilli, NoDogSplash, LEDE). IoT sensor integration and Arduino. AI-assisted engineering with Claude Code and MCP.</p>
+
+      <span class="lbl">Frontend</span>
+
+      <p>
+        React, Three.js, ReactFlow, Next.js, AngularJS, Tailwind CSS,
+        Material UI, Ant Design, Recharts, analytical dashboards
+        and multi-language interfaces.
+      </p>
+
     </div>
+
+
+    <div class="skrow">
+
+      <span class="lbl">Programming</span>
+
+      <p>
+        Python · JavaScript / Node.js · C#
+      </p>
+
+    </div>
+
+
+    <div class="skrow">
+
+      <span class="lbl">Cloud &amp; DevOps</span>
+
+      <p>
+        AWS EC2/S3, Azure GPU VMs and storage, GCP Compute Engine,
+        Docker, Docker Compose, Git, Jupyter, conda/Miniconda,
+        Bash, FFmpeg, pytest, Jest, Linux, systemd and embedded Linux.
+      </p>
+
+    </div>
+
   </div>
+
 </section>
 
-<footer>
-  <div class="sechead bbox" style="margin-bottom:20px">
-    <span class="lbl">Open to</span>
-    <h2>Senior machine learning &amp; computer vision roles</h2>
+
+<!-- =======================================================
+     EDUCATION
+     ======================================================= -->
+
+<section>
+
+  <div class="sechead bbox">
+    <span class="lbl">Education</span>
+    <h2>Academic background</h2>
   </div>
+
+  <div class="education-card">
+
+    <h3>B.Sc. Computer Science</h3>
+
+    <p>
+      Guru Nanak College, Chennai · 2017
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =======================================================
+     OPEN TO
+     ======================================================= -->
+
+<footer>
+
+  <div class="sechead bbox" style="margin-bottom:20px">
+
+    <span class="lbl">Open to</span>
+
+    <h2>
+      Senior ML, Computer Vision &amp; Edge AI roles
+    </h2>
+
+  </div>
+
   <p class="lede" style="margin-bottom:0">
-    I am looking for work where owning the full pipeline matters — data through deployment — rather
-    than one slice of it. Happy to walk through any number on this page and show where it came from.
+
+    I am looking for opportunities where I can own meaningful parts of
+    the AI pipeline — from data and model development through application
+    integration, optimisation and deployment.
+
   </p>
-  <a class="cta" href="mailto:saiakash246@gmail.com?subject=Machine%20Learning%20role">Get in touch →</a>
+
+  <div class="cta-row">
+
+    <a class="cta"
+       href="Akash_Murugan_Resume.pdf"
+       target="_blank">
+      Download Resume →
+    </a>
+
+    <a class="cta secondary"
+       href="https://www.linkedin.com/in/akash-murugan-6472aa143/"
+       target="_blank"
+       rel="noopener">
+      LinkedIn →
+    </a>
+
+    <a class="cta secondary"
+       href="mailto:saiakash246@gmail.com?subject=Machine%20Learning%20Opportunity">
+      Contact Me →
+    </a>
+
+  </div>
+
   <p class="note">
-    B.Sc. Computer Science, Guru Nanak College, Chennai · 2017. English (professional), Tamil (native).
+    B.Sc. Computer Science, Guru Nanak College, Chennai · 2017.
+    English (professional) · Tamil (native).
   </p>
+
 </footer>
 
 </div>
 
 </body>
 </html>
+```
